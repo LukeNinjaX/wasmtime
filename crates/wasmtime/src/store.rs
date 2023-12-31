@@ -1207,6 +1207,7 @@ impl StoreOpaque {
 
     pub fn bump_resource_counts(&mut self, module: &Module) -> Result<()> {
         fn bump(slot: &mut usize, max: usize, amt: usize, desc: &str) -> Result<()> {
+            print!("bump_resource_counts, max: {0}, amt: {1}\n", max, amt);
             let new = slot.saturating_add(amt);
             if new > max {
                 bail!(
@@ -1303,6 +1304,7 @@ impl StoreOpaque {
             handle: handle.clone(),
             kind: StoreInstanceKind::Real { module_id },
         });
+        println!("instances count in store: {0}", self.instances.len());
         InstanceId(self.instances.len() - 1)
     }
 

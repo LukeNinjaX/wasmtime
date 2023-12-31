@@ -399,6 +399,7 @@ pub trait InstanceAllocator: InstanceAllocatorImpl {
         request: &mut InstanceAllocationRequest,
         memories: &mut PrimaryMap<DefinedMemoryIndex, (MemoryAllocationIndex, Memory)>,
     ) -> Result<()> {
+        println!("++++++++++++++++allocate_memories");
         let module = request.runtime_info.module();
 
         #[cfg(debug_assertions)]
@@ -430,6 +431,7 @@ pub trait InstanceAllocator: InstanceAllocatorImpl {
         &self,
         memories: &mut PrimaryMap<DefinedMemoryIndex, (MemoryAllocationIndex, Memory)>,
     ) {
+        println!("==============deallocate_memories");
         for (memory_index, (allocation_index, memory)) in mem::take(memories) {
             // Because deallocating memory is infallible, we don't need to worry
             // about leaking subsequent memories if the first memory failed to
